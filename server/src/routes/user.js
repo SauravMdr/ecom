@@ -1,5 +1,7 @@
 const express = require('express')
 router = express.Router()
+
+//import controller
 const {registerNewUser}  = require('../controllers/user')
 
 router.post('/register', registerNewUser)

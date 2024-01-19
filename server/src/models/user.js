@@ -1,15 +1,18 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
-  title: String, // String is shorthand for {type: String}
-  author: String,
-  body: String,
-  comments: [{ body: String, date: Date }],
-  date: { type: Date, default: Date.now },
-  hidden: Boolean,
-  meta: {
-    votes: Number,
-    favs: Number
-  }
+const userSchema = new Schema({ 
+  //define schema according to your project
+  fullName: String,
+  email: String,
+  role: {
+    type: String,
+    enum : ['user','admin'],
+    default: 'user'
+    },
+  password: String
 });
+
+//create model
+const User = mongoose.model('User', userSchema);
+module.exports = User
