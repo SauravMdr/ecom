@@ -33,7 +33,7 @@ export default function App() {
       </NavbarContent>
 
       <NavbarContent as="div" className="items-center" justify="end">
-       <Button>Login</Button>
+       <Button><Link  href="/login">Login</Link></Button>
        <Button><Link  href="/register">Register</Link></Button>
         <Dropdown placement="bottom-end">
           <DropdownTrigger>

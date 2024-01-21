@@ -4,6 +4,10 @@ const app = express()
 //connection import
 const connection = require('./db/connection')
 
+//import cors
+const cors = require('cors')
+app.use(cors())
+
 require('dotenv').config()
 
 //body parser

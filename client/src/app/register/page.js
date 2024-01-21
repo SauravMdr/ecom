@@ -1,54 +1,77 @@
 'use client'
 import React from 'react';
 import { useFormik } from 'formik';
-import {Input} from "@nextui-org/react";
- 
 import * as Yup from 'yup';
-const SignupSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
-});
+import {Input, Button} from "@nextui-org/react";
+
 const SignupForm = () => {
+  const SignupSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Required')
+  });
+
+  const registerUser = async(values) => {
+    await fetch('http://localhost:5000/register/',{
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(values)
+    })
+  }
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
+      phoneNumber: '',
       email: '',
+      password: '',
+      role: ''
     },
     validationSchema:SignupSchema,
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      registerUser(values)
     },
   });
   return (
     <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="firstName">First Name</label>
-      <Input
-        id="firstName"
-        name="firstName"
+      <h1>Register</h1>
+      <Input 
+        id="phoneNumber"
+        name="phoneNumber"
         type="text"
         onChange={formik.handleChange}
-        value={formik.values.firstName}
+        value={formik.values.phoneNumber} 
+        label="phoneNumber" 
       />
-      <label htmlFor="lastName">Last Name</label>
-      <Input
-        id="lastName"
-        name="lastName"
-        type="text"
-        onChange={formik.handleChange}
-        value={formik.values.lastName}
-      />
-      <label htmlFor="email">Email Address</label>
-      <Input
+
+      <Input 
         id="email"
         name="email"
-        type="email"
+        type="text"
         onChange={formik.handleChange}
-        value={formik.values.email}
+        value={formik.values.email} 
+        label="email" 
       />
-      {formik.errors?.email}
-      <button type="submit">Submit</button>
+      {formik?.errors.email}
+      <Input 
+        id="password"
+        name="password"
+        type="password"
+        onChange={formik.handleChange}
+        value={formik.values.password} 
+        label="password" 
+      />
+
+      <Input 
+        id="role"
+        name="role"
+        type="text"
+        onChange={formik.handleChange}
+        value={formik.values.role} 
+        label="role" 
+      />
+      <Button type="submit">Submit</Button>
     </form>
   );
 };
- 
+
 export default SignupForm
+
+
+

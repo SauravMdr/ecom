@@ -3,11 +3,11 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({ 
   //define schema according to your project
-  fullName: String,
+  phoneNumber: {type:String, unique: true, required: true}, 
   email: String,
   role: {
     type: String,
-    enum : ['user','admin'],
+    enum : ['user','admin','rider'],
     default: 'user'
     },
   password: String
