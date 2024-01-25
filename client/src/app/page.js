@@ -1,11 +1,16 @@
+'use client'
 import React from 'react'
 import Nav from '@/components/navBar/page'
 import Footer from '@/components/footer/page'
+import { useSelector, useDispatch } from 'react-redux'
 
 const page = () => {
+  const {count} = useSelector(state=>state.count)
   return (
     <div>
       <Nav/>
+      count is {count}
+      <button >Increment</button>
       <section className="text-gray-600 body-font">
   <div className="container px-5 py-24 mx-auto">
     <div className="flex flex-col text-center w-full mb-20">
